@@ -1,0 +1,4 @@
+astro dev init
+astro dev start
+astro dev stop
+astro dev start --wait 2m
