@@ -15,28 +15,28 @@ Fichiers et Code
 ==================
 Le code est organisé en un DAG Airflow unique (weather_etl_pipeline) et contient les éléments suivants :
 
-  . Paramètres de connexion :
+    -  Paramètres de connexion :
 
-      .POSTGRES_CONN_ID : Identifiant de connexion Airflow pour PostgreSQL.
-      .API_CONN_ID : Identifiant de connexion Airflow pour l'API Open-Meteo.
-  .Détails de la localisation :
+        - POSTGRES_CONN_ID : Identifiant de connexion Airflow pour PostgreSQL.
+        - API_CONN_ID : Identifiant de connexion Airflow pour l'API Open-Meteo.
+    - Détails de la localisation :
 
-      .Coordonnées pour Rabat : LATITUDE = '34.020882' et LONGITUDE = '-6.841650'.
+        - Coordonnées pour Rabat : LATITUDE = '34.020882' et LONGITUDE = '-6.841650'.
 
 Code du Pipeline ETL
 =====================
 Le DAG weather_etl_pipeline est programmé pour s'exécuter quotidiennement avec les étapes suivantes :
 
 1. extract_weather_data() :
-  - Utilise un hook HTTP pour interagir avec l'API Open-Meteo.
-  - Récupère les données de l'API pour les coordonnées spécifiées.
+    - Utilise un hook HTTP pour interagir avec l'API Open-Meteo.
+    - Récupère les données de l'API pour les coordonnées spécifiées.
 2. transform_weather_data(weather_data) :
-  - Transforme les données JSON reçues de l'API en un dictionnaire structuré.
-  - Les champs incluent latitude, longitude, temperature, windspeed, winddirection, et weathercode.
+    - Transforme les données JSON reçues de l'API en un dictionnaire structuré.
+    - Les champs incluent latitude, longitude, temperature, windspeed, winddirection, et weathercode.
 3. load_weather_data(transformed_data) :
-  - Se connecte à la base de données PostgreSQL via un hook.
-  - Crée une table weather_data si elle n'existe pas encore.
-  - Insère les données transformées dans la table.
+    - Se connecte à la base de données PostgreSQL via un hook.
+    - Crée une table weather_data si elle n'existe pas encore.
+    - Insère les données transformées dans la table.
 
 Conclusion
 ==========
